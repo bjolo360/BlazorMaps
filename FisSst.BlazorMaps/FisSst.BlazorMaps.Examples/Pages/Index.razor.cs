@@ -35,6 +35,7 @@ namespace FisSst.BlazorMaps.Examples.Pages
         private async Task GetCenterExample()
         {
             LatLng center = await this.mapRef.GetCenter();
+            var bound = await this.mapRef.GetBounds();
             await this.JsRuntime.InvokeAsync<string>("alert", $"Map centered at: Lat: {center.Lat}, Lng: {center.Lng}");
         }
     }

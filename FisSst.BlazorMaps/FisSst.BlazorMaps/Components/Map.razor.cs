@@ -112,6 +112,16 @@ namespace FisSst.BlazorMaps
             await this.MapEvented.OnMouseUp(callback);
         }
 
+        public async Task OnZoomEnd(Func<Event, Task> callback)
+        {
+            await this.MapEvented.OnZoomEnd(callback);
+        }
+
+        public async Task OnMoveEnd(Func<Event, Task> callback)
+        {
+            await this.MapEvented.OnMoveEnd(callback);
+        }
+
         public async Task OnMouseOver(Func<MouseEvent, Task> callback)
         {
             await this.MapEvented.OnMouseOver(callback);

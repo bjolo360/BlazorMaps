@@ -56,6 +56,11 @@ namespace FisSst.BlazorMaps.Examples.Pages
             await this.JsRuntime.InvokeVoidAsync("alert", $"Event type: {mouseEvent.Type} Lat: {mouseEvent.LatLng.Lat}, Lng: {mouseEvent.LatLng.Lng}");
         }
 
+        private async Task HandleEvent(Event e)
+        {
+            await this.JsRuntime.InvokeVoidAsync("alert", $"Event type: {e.Type} ");
+        }
+
         private async Task AddPolygonToMap()
         {
             LatLng FirstLatLng = new LatLng(50.2905456, 18.634743);
@@ -113,6 +118,8 @@ namespace FisSst.BlazorMaps.Examples.Pages
 
         private async Task AddEventsToMap()
         {
+            await this.mapRef.OnMoveEnd(async (Event e) => await HandleEvent(e));
+            await this.mapRef.OnZoomEnd(async (Event e) => await HandleEvent(e));
             await this.mapRef.OnClick(async (MouseEvent mouseEvent) => await HandleMouseEvent(mouseEvent));
         }
 

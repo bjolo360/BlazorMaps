@@ -18,10 +18,14 @@ namespace FisSst.BlazorMaps
         private const string MouseUpJsFunction = "mouseup";
         private const string MouseOverJsFunction = "mouseover";
         private const string MouseOutJsFunction = "mouseout";
+        private const string ZoomEndJsFunction = "zoomend";
+        private const string MoveEndJsFunction = "moveend";
         private const string ContextMenuJsFunction = "contextmenu";
         private const string OffJsFunction = "off";
         protected IEventedJsInterop EventedJsInterop;
+
         private readonly IDictionary<string, Func<MouseEvent, Task>> MouseEvents = new Dictionary<string, Func<MouseEvent, Task>>();
+
 
         public async Task OnClick(Func<MouseEvent, Task> callback)
         {
@@ -56,6 +60,16 @@ namespace FisSst.BlazorMaps
         public async Task OnContextMenu(Func<MouseEvent, Task> callback)
         {
             await On(ContextMenuJsFunction, callback);
+        }
+
+        public async Task OnZoomEnd(Func<Event, Task> callback)
+        {
+            await On(ZoomEndJsFunction, callback);
+        }
+
+        public async Task OnMoveEnd(Func<Event, Task> callback)
+        {
+            await On(MoveEndJsFunction, callback);
         }
 
         private async Task On(string eventType, Func<MouseEvent, Task> callback)
